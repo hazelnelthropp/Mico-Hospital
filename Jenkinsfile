@@ -2,12 +2,12 @@ pipeline {
     agent any
 
     stages {
-    stage('CheckOut') {
-      steps {
-        echo 'Checkout the source code from GitHub'
-        git credentialsId: 'hazelnelthropp', url: 'https://github.com/hazelnelthropp/Mico-Hospital.git'
+        stage('CheckOut') {
+            steps {
+                echo 'Checkout the source code from GitHub'
+                git 'https://github.com/kranthi619/med-pro.git'
             }
-
+        }
         stage('Run Ansible Playbook') {
             steps {
                 // Run ansible playbook
