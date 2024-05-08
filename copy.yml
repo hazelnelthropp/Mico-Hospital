@@ -1,19 +1,24 @@
 - hosts: webservers
-  become: True
+  become: true
   tasks:
     - name: Install packages
-      apt:
-        name: apache2
+      yum:
+        name: httpd                   # httpd is the package name for Apache on AWS Linux
         state: present
+
     - name: Start Apache server
       service:
-        name: apache2
+        name: httpd
         state: started
+        enabled: yes                # Ensure Apache starts on boot
+
     - name: Add firewall rules
-      ufw:
-        rule: allow
-        port: 80
-        proto: tcp
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+
     - name: Deploy static website
       copy:
         src: index.html
