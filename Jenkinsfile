@@ -7,6 +7,6 @@ pipeline {
                 echo 'Checkout the source code from GitHub'
                 git 'https://github.com/hazelnelthropp/Mico-Hospital.git'
             }
-        )
+        }
     }
 }
