@@ -2,14 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('git clone') {
+        stage('Git Clone') {
             steps {
-            git 'https://github.com/hazelnelthropp/Mico-Hospital.git'
+                // Fetch code from Git repository using credentials
+                git credentialsId: 'hazelnelthropp', url: 'https://github.com/hazelnelthropp/Mico-Hospital.git'
             }
         }
 
-        stage('build') {
+        stage('Run Ansible Playbook') {
             steps {
+                // Run ansible playbook
                 ansiblePlaybook(
                     credentialsId: '76c38d7d-75d8-4180-b101-5fa4acb4750b',
                     disableHostKeyChecking: true,
