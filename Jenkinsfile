@@ -2,12 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Git Clone') {
-            steps {
-                // Fetch code from Git repository using credentials
-                git credentialsId: 'hazelnelthropp', url: 'https://github.com/hazelnelthropp/Mico-Hospital.git'
+    stage('CheckOut') {
+      steps {
+        echo 'Checkout the source code from GitHub'
+        git credentialsId: 'hazelnelthropp', url: 'https://github.com/hazelnelthropp/Mico-Hospital.git'
             }
-        }
 
         stage('Run Ansible Playbook') {
             steps {
