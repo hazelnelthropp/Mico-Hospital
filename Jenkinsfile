@@ -1,20 +1,20 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('CheckOut') {
+        stage('Checkout') {
             steps {
-                echo 'Checkout the source code from GitHub'
-                git url: 'https://github.com/hazelnelthropp/Mico-Hospital.git'
+                git 'https://github.com/hazelnelthropp/Mico-Hospital.git'
             }
         }
-        stage('Run Ansible Playbook') {
+        stage('Deploy') {
             steps {
                 ansiblePlaybook(
-                    playbook: 'copy.yml',
+                    credentialsId: 'd22c5698-5f03-4724-bfc2-83430bd6406f',
+                    disableHostKeyChecking: true,
+                    installation: 'ansible',
                     inventory: 'dev.inv',
-                    privateKey: 'jenkins-2.pem',
-                    ansibleName: 'Ansible'
+                    playbook: 'copy.yml'
                 )
             }
         }
